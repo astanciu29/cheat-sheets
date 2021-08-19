@@ -1,0 +1,45 @@
+
+
+
+C++ string                                       VS                         C style string
+==================================================================================================================
+#include <string>                                |  no include
+in std namespace                                 |
+------------------------------------------------------------------------------------------------------------------
+contigous in memory                              | contigous in memory 
+------------------------------------------------------------------------------------------------------------------
+is a class - has useful functions                | needs includes for useful functions; 
+                                                 | #include <cstring>
+------------------------------------------------------------------------------------------------------------------
+class                                            | null terminated array of char
+------------------------------------------------------------------------------------------------------------------
+dynamic size                                     | can add extra chars if the size allows it 
+                                                 | BUT be mindful of "\0". It needs to exist!
+------------------------------------------------------------------------------------------------------------------
+Declaration:                                     | Declaration:
+string s1; //Empty                               | char s1[20]; // character array; can hold cstring but it's not 
+string s2 {"Andreea"}; //Andreea                 |              not yet one
+string s3 {s2}; //Andreea                        | char s2[20] { 'h','e','l','l','o','\0'}; //array initialization
+string s4 {"Andreea", 3}; //And                  | char my_name [] {"Andreea"}; //shortcut array initialization
+string s5 {s3, 0, 2}; //An                       | char s3[20] = ""; //Empty or null cstring of lenght 0, 
+string s6 (3, 'A'); //AAA                        |              equal to ""
+-------------------------------------------------------------------------------------------------------------------
+Assignment:                                      | Assignment:
+string s1;                                       | char my_name [8];
+s1 = "Hello";                                    | my_name = "Andreea"; //ERROR
+string s2 {"there"};                             | strcpy(my_name, "Andreea"); //OK
+s2 = s1;                                         |
+-------------------------------------------------------------------------------------------------------------------
+Concatenation:                                   | Concatenation:
+string part1 {"Hello"};                          | char str[80];
+string part2 {"there"};                          | strcat( str, "Hello");
+string sentence = part1 + part2;                 |
+-------------------------------------------------------------------------------------------------------------------
+Accessing elements:                              | Accessing elements:    
+- similar to a vector                            |  - similar to an array
+                                                 | 
+my_name [0]; //A                                 | my_name[0]; //A
+my_name.ar(0); //A                               |
+                                                 |
+- can use for range loops                        |
+-------------------------------------------------------------------------------------------------------------------
