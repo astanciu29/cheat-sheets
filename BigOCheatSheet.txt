@@ -1,0 +1,43 @@
+Big O cheat sheet
+-----------------
+
+Time complexity = the amount of time taken by an algorithm to run, as a function of the length of the input
+
+Space complexity = The space complexity of an algorithm or a computer program is the amount of memory space required to solve an instance of the computational problem as a function of characteristics of the input. It is the memory required by an algorithm until it executes completely.
+
+
+Big Os:
+    - O(1) - constant - no loops
+    - O(logN) - logarithmic - usually searching algorithms have logN if they are sorted (Binary search)
+    - O(N) - linear - for loops, while loops through n items
+    - O(NlogN) - log linear - usually sorting operations
+    - O(n^2) - quadratic - every element in the collection is compared to every other element ( two nested loops)
+    - O(2^N) - exponential - recursive algorithms that solve a problem of size N 
+    - O(N!) - factorial - is adding a loop for every element
+
+Excelent - O(1)
+Good - O(logN)
+Fair - O(N)
+Bad - O(NlogN)
+Horrible - O(n^2), O(2^n), O(n!)
+
+What causes space complexity? 
+    - Variables
+    - Data structures
+    - Function call
+    - Allocations
+
+What causes time complexity in a function?
+    - operations (+ , - , * , /)
+    - comparisons ( < , <= , >=, >, ==)
+    - looping (for, while)
+    - outside function call
+
+How to determine time/ space complexity?
+
+1. Always consider the worst case (eg - n iterations to find an element in a list of n elements)
+2. Remove constants  - O(1 + n/2 + 100) = O(n/2 + 101) = O(n/2) = O(n)
+3. Different inputs should have different values - A and B nested would be O(a*b)
+4. Drop non dominant terms and consider only the coefficient of the dominant term - O(n) + O(2n^2) = O(n^2)
+
+
