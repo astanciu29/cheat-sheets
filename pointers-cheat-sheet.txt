@@ -1,0 +1,135 @@
+
+
+Pointers cheat sheet
+--------------------
+
+
+Pointer = is a variable whose value is an address
+
+Why use pointers?
+    - inside functions - can access data defined outside the function
+    - can be used to operate on arrays very efficiently
+    - used to allocate memory on the heap (this memory doesn't have a variable name and the only way to access it is via pointers)
+
+Declaration:
+
+    --> variable_type *pointer_name;
+
+    int * int_ptr;
+
+How to read them:
+    Always from right to left!:
+    int *int_ptr; - int_ptr is pointer to integer
+
+Always initialize pointers before using them! Otherwise it will have garbage data
+    --> variable_type *pointer_name {nullptr}; - pointing to "nowhere"
+
+
+Accessing pointer address: - the & operator
+    int *num;
+    cout<<"Value of num is"<<num<<endl; //garbage
+    cout<<"Size of num is"<<sizeof num<<endl; //4 - bytes on my machine
+    cout<<"Address of num is"<<&num<<endl; //0x61FF1C
+
+    num = nullptr; //set num to point nowhere
+    cout<<"Value of num is"<<num<<endl; //0
+
+Don't confuse the size of the pointer and the size of what it points to!
+    - All pointers in a program have the same size
+    - BUT they may be pointing to small or large data types
+
+Dereferencing a pointer = Accessing the data we're pointing to - the dereferencing operator *
+    int score {100};
+    int score_ptr {&score};
+    cout<<*score_ptr<<endl; //100
+
+Dynamic memory allocation = Allocating storage from the Heap at runtime
+    -->using the new keyword
+
+    int size{3};
+    int *array_ptr  = new int[size]; //allocate array on the Heap
+    delete [] array_ptr; //deallocate array
+
+Relationship between pointers and arrays:
+    - the value of an array namei is the address of the first element in the array
+    - the value of a pointer variable is an address
+    - if the pointer points to the same data type as the array element then the pointer and array name can be used interchangeably (almost) - the only difference is that the array name is not a variable, so it can't be changed
+
+Subscript and Offset notation equivalence:
+
+int array_num [] {1,2,3,4,5};
+int *ptr_num {array_num};
+
+Subscript notation                    VS           Offset notation
+==========================================================================
+array_name[index]                     | *(array_name +index)
+--------------------------------------------------------------------------
+ptr_num[index]                        | *(ptr_num +index)
+--------------------------------------------------------------------------
+
+Pointer Arithmetic:
+    -only makes sense with raw arrays 
+
+    -> (++) - increments a pointer to point to the next array element 
+                int_ptr++;
+    -> (--) - decrements a pointer to point to the previous array element 
+                int_ptr--
+    -> (+) - increments a pointer by n* sizeof(type) 
+                int_ptr+=n;
+    -> (-) - decrements a pointer by n* sizeof(type) 
+                int_ptr-=n;
+    -> substracting 2 pointers - determines the number of elements between the pointers.
+                 Both pointers must be of the same type
+    -> comparing 2 pointers (==) and (!=) - determines if 2 pointers point to the same location
+                                          - does not compare the data where they point
+
+Const and pointers:
+    - pointers to constants
+    - const pointers
+    - const pointers to constants
+
+
+--> pointers to constants:
+        - the data pointed to by the pointer is constant 
+        - the pointer itself can change and point somwhere else 
+
+        int high_score{100};
+        int low_score {65};
+
+        const int *score_ptr {&high_score};   -  (reads right to left <---  score_ptr points to an int, which is const)
+
+        *score_ptr = 86; //Error
+        score_ptr = &low_score; //OK 
+
+
+--> constant pointer:
+        - the data pointed to by the pointer can be changed
+        - the pointer itself cannot change and point somwhere else 
+
+        int high_score{100};
+        int low_score {65};
+
+        int * const score_ptr {&high_score};   -  (reads right to left <---  score_ptr is a constant pointer to int)
+
+        *score_ptr = 86; //OK
+        score_ptr = &low_score; //ERROR 
+
+--> constant pointer to constant:
+        - the data pointed to by the pointer is constant
+        - the pointer itself cannot change and point somwhere else 
+
+        int high_score{100};
+        int low_score {65};
+
+        const int * const score_ptr {&high_score};   -  (reads right to left <---  score_ptr is a constant pointer to a constant int)
+
+        *score_ptr = 86; //Error
+        score_ptr = &low_score; //ERROR 
+
+
+Potential pointer pitfalls:
+    - Uninitialized pointers
+    - Dangling pointers (stray) = pointer to a released memory address
+    - Not checking if a new failed to allocate memory
+    - Leaking Memory
+
