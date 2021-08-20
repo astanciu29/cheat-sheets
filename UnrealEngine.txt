@@ -1,0 +1,87 @@
+
+
+Unreal Engine Cheat sheet
+-------------------------
+
+
+--------
+|Object| - stores data ; cannot be placed in the level
+--------
+    ^
+    |
+--------
+| Actor| - can be placed in the level; can have a visual representation
+--------
+    ^
+    |
+--------
+| Pawn | - can be posses by a controller
+--------
+    ^
+    |
+-----------
+|Character| - has a character movement componentl has functionality appropriate for characters
+-----------
+
+
+
+----------------------------------------------
+| Package     Meshes    Textures             |
+|  --------------------------------------    |
+|  |    World                           |    |
+|  |   ----------------------------     |    |
+|  |   |                          |     |    |
+|  |   | Level                    |     |    |
+|  |   |  ---------------------   |     |    |
+|  |   |  |   Actor           |   |     |    |
+|  |   |  |   --------------  |   |     |    |
+|  |   |  |   | Actor      |  |   |     |    |
+|  |   |  |   | component  |  |   |     |    |
+|  |   |  |   --------------  |   |     |    |
+|  |   |  ---------------------   |     |    |
+|  |   ----------------------------     |    |
+|  --------------------------------------    |
+---------------------------------------------- 
+
+
+
+
+Ai needs :
+    - navigation mesh - controlls where an AI can move
+    - BB (Blackboard) - the memory of the AI (stores the variables)
+    - BT (Behaviour Tree) - structures behaviours as lots of trees of behaviours
+
+
+Task vs Composite nodes:
+    Task - something that is executed
+    Sequence (is a composite node) - is a sequence of tasks and it will run all tasks in order (until one fails)
+    Selector (is a composite node) -  has a bunch of tasks underneath and runs until one of them succeeds
+    Decorator ( right click on a node -> decorators) - change the way a node works
+    Service - a way of running something every ticj or every so often whenever a particular path is active
+
+
+
+----------------------            is A        ---------------
+| c++ character class|  <-------------------- |BP Character |
+----------------------                        ---------------
+                                                    | has A
+                                            ------------------
+                                            | Skeletal Mesh  |
+                                            ------------------
+                                                    | uses
+                                            ------------------
+                                            |  Animation BP  |
+                                            ------------------
+                                                    | uses
+                                            ----------------
+                                            | Blend spaces  |
+                                            -----------------
+
+
+Run-time messages for feedback:
+    - Using the UE output log
+    - UE_LOG(Category, Verbosity, TEXT("Message"));
+    - UE_LOG(LogTemp, Warning, Text("This is a warning"));
+            > Error = Red
+            > Warning = Yellow
+            > Display = Grey
