@@ -1,0 +1,57 @@
+iterators
+---------
+-> give indirect access to an element in a container or a character in a string
+-> used to fetch an element
+-> have operations to move from one element to another
+-> may be valid or invalid: 
+        - valid iterator - denotes an element or a position one past the last element
+        - invalid iterator - all other iterator values
+-> types that have iterators have memebers that return iterators:
+        - begin - returns an iterator that denotes the first element (or the first character), if there is one
+        - end - returns an iterator positioned "one past the end" od the associated container (or string). The iterator denotes a nonexistent element "off the end" of the containter - used as a marker idicating when we have processed all the elements 
+
+        Note: if the iterators return by begin and end are equal - they are both off-the-end iterators => the container is empty
+
+        // the complier determines the type of b and e
+        // b denites the first element and e denotes one past the last element in v
+        auto b = v.begin(), e = v.end(); //b and e have the same type
+
+Iterator operations:
+----------------------------------------------------------------------------------------------------------------------------
+|*iter         | returns a reference to the element denoted by the iterator iter                                           |
+----------------------------------------------------------------------------------------------------------------------------
+|iter->mem     | dereferences iter and fetches the memeber named mem from the underlying element. equivalent to (*iter).mem|
+----------------------------------------------------------------------------------------------------------------------------
+|++iter        | increments iter to refer to the next element in the container                                             |
+----------------------------------------------------------------------------------------------------------------------------
+|--iter        | decrements iter to refer to the previous element in the container                                         |
+----------------------------------------------------------------------------------------------------------------------------
+|iter1 == iter2| compares two iterators for equality (inequality). teo iterators are equal if they denote the same element |
+|iter1 != iter2|  or if they are off-the-end iterators for the same container                                              |
+----------------------------------------------------------------------------------------------------------------------------
+
+Note: Because the iterator returned from the end does not denote an element, it may not be incremented or dereferenced 
+Note: If the object on which the iterators operate, then begin and ened return a const_iterator; if the object is not const, they return iterator:
+    vector<int> v;
+    const vectr<int> cv;
+    auto it1 = v.begin(); //it1 has type vector<int>::iterator
+    auto it2 = cv.begin(); //it2 has type vector<int>::const_iterator
+
+Note: Loops that use iterators whould not add elements to the container to which the iterators refer.
+
+Iterator arithmetic:
+----------------------------------------------------------------------------------------------------------------------------
+| iter + n  | adding (substracting) an integral value n to (from) an iterator yields an iterator that many elements forward  |
+| itern -n  | (backwards) within the container. The resuling container must denotes elements in, or one past the end of the  |
+|           | same container.                                                                                                |
+-----------------------------------------------------------------------------------------------------------------------------
+| iter1 +=n |Compound-assignment for iterator addition and substraction. Assigns to iter1 the value of adding n to, or       |
+| iter1 -=n |substracting n from iter1.                                                                                      |
+-----------------------------------------------------------------------------------------------------------------------------
+|iter1-iter2| substracting 2 iterators ields the number that, when added to the right-hand iterator, yields the left-hand    |
+|           | iterator.                                                                                                      |
+-----------------------------------------------------------------------------------------------------------------------------
+|>, >=, <,<=| relational operators on iterators. one iterator is less than another if it refers to an element that appears in|
+|           | the container before the one referred to by the other iterator. the iterators myst denote elements in, or one  |
+|           | past the end of the same container.                                                                            |
+-----------------------------------------------------------------------------------------------------------------------------

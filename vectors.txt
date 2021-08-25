@@ -1,0 +1,46 @@
+vectors
+-------
+
+#include <vector>
+using std::vector;
+
+vector - is a class template, not a type. Types generated from vector must include the element type, eg. vector<int>.
+
+Definition and initialization:
+------------------------------
+
+Note: default initialization creates an empty vector of the specified type.
+
+
+vector<T> v1; // vector that holds object of type T. default initialization; v1 is empty
+vector<T> v2 (v1); // constructor initialization; v2 has a copy of each element in v1
+vector<T> v2 = v1; //equivalent to v2(v1); v2 has a copy of each element in v1
+vector<T> v3 (n, val); //v3 has n elements with value val
+vector<T> v4 (n); //v4 has n copies of a value-initialized object
+vector<T> v5 {a,b,c...} //list initialization; v5 has as many elements as there are initializers; elements are initialized by corresponding initializers
+vectr <T> v5 = {a,b,c...} //list initialization; equivalent to  v5 {a,b,c...}; v5 has as many elements as there are initializers; elements are initialized by corresponding initializers
+
+Adding elements to vector: push_back()
+--------------------------
+vector<string> text;
+
+text.push_back("Hello");
+
+Note: the body of a range for must not change the size of the sequence over which it is iterating.
+
+Vector operations:
+------------------
+v.empty(); //Returns true if v is empty; oterwise returns false
+v.size(); // returns the number of elements in v
+v.push_back(t); // adds an element with value t to the end of v
+v[n] // returns a reference to the element at position n in v
+v1 = v2; //replaces the elements in v1 with a copy of the elements in v2
+v1 = {a,b,c..} // replaces the elements in v1 with a copy of the elements in the comma-separated list
+v1 == v2 //v1 and v2 are equal if they have the same number of elements and each element in v1 is equal to the corresponding element in v2
+v1 != v2
+<, <=, >, >= // have their normal meaning using dictionary ordering 
+
+
+Note: The subscript operator [] on vector (and string) fetches an existing element; it does not add an element
+vector<int> ivec; //empty vector
+cout<<ivec[0]; //error:ivec has no elements
